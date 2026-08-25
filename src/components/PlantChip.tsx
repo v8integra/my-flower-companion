@@ -2,6 +2,7 @@ import { AppIcon } from "@/components/AppIcon";
 import { useLanguage } from "@/context/LanguageContext";
 import { Plant } from "@/data/plants";
 import { getPlantName } from "@/translations/plant-names";
+import ToxicityBadge from "@/components/ToxicityBadge";
 import "./PlantChip.css";
 
 interface PlantChipProps {
@@ -17,6 +18,7 @@ export default function PlantChip({ plant, onRemove, compact = false }: PlantChi
   return (
     <div className={`plant-chip plant-chip-${plant.type}${compact ? " plant-chip-compact" : ""}`}>
       <span className="plant-chip-name">{displayName}</span>
+      {plant.toxicity && <ToxicityBadge plant={plant} />}
       {onRemove && (
         <button
           type="button"

@@ -1,0 +1,40 @@
+.toxicity-icon {
+  display: inline-flex;
+  align-items: center;
+  cursor: help;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+.toxicity-banner {
+  display: flex;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid;
+  align-items: flex-start;
+}
+
+.toxicity-banner-danger {
+  background: var(--danger-light);
+  border-color: var(--danger);
+}
+
+.toxicity-banner-caution {
+  background: var(--warning-light);
+  border-color: var(--warning);
+}
+
+.toxicity-banner-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.toxicity-banner-note {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 17px;
+  margin: 0;
+}

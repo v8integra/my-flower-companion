@@ -2,6 +2,7 @@ import { AppIcon } from "@/components/AppIcon";
 import { useLanguage } from "@/context/LanguageContext";
 import { Plant } from "@/data/plants";
 import { getPlantName } from "@/translations/plant-names";
+import ToxicityBadge from "@/components/ToxicityBadge";
 import "./CompanionCard.css";
 
 type BenefitType = "pest-control" | "pollination" | "soil" | "growth" | "general";
@@ -46,7 +47,10 @@ export default function CompanionCard({ plant, benefit, benefitType }: Companion
           <AppIcon name={config.icon} size={20} color={config.color} />
         </div>
         <div className="companion-card-header-text">
-          <div className="companion-card-name">{displayName}</div>
+          <div className="companion-card-name">
+            {displayName}
+            {plant.toxicity && <ToxicityBadge plant={plant} />}
+          </div>
           <div className="companion-card-type">{typeLabel[plant.type]}</div>
         </div>
         <div className="companion-card-badge" style={{ background: config.bg, color: config.color }}>

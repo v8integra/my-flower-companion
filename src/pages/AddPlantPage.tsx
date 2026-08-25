@@ -5,6 +5,7 @@ import { useGarden } from "@/context/GardenContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { PLANTS, Plant } from "@/data/plants";
 import { getPlantName } from "@/translations/plant-names";
+import ToxicityBadge from "@/components/ToxicityBadge";
 import "./AddPlantPage.css";
 
 export default function AddPlantPage() {
@@ -143,6 +144,7 @@ export default function AddPlantPage() {
                 <div className="plant-row-info">
                   <div className="plant-row-name-line">
                     <span className="plant-row-name">{getPlantName(item, lang)}</span>
+                    {item.toxicity && <ToxicityBadge plant={item} />}
                     {isCustom && <span className="custom-badge">{t("custom_badge")}</span>}
                   </div>
                   <span className={`plant-row-type plant-row-type-${item.type}`}>{typeLabel[item.type]}</span>

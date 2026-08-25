@@ -5,6 +5,7 @@ import { PLANTS, Plant } from "@/data/plants";
 import { CARE_GUIDES, CareGuide } from "@/data/care";
 import { getPlantName } from "@/translations/plant-names";
 import PLANT_IMAGES from "@/data/plant-images";
+import ToxicityBadge from "@/components/ToxicityBadge";
 import "./CarePage.css";
 
 const SUN_ICON: Record<string, string> = {
@@ -73,6 +74,8 @@ function CareModal({ plant, guide, onClose }: { plant: Plant; guide: CareGuide; 
         </div>
 
         <div className="care-sheet-scroll">
+          <ToxicityBadge plant={plant} variant="banner" />
+
           {imageUrl && <img src={imageUrl} alt={getPlantName(plant, lang)} className="care-plant-image" loading="lazy" />}
 
           <div className="zone-bar">
@@ -183,7 +186,10 @@ export default function CarePage() {
                 <AppIcon name={item.icon} size={22} color="currentColor" />
               </div>
               <div className="care-row-info">
-                <span className="care-row-name">{getPlantName(item, lang)}</span>
+                <span className="care-row-name">
+                  {getPlantName(item, lang)}
+                  {item.toxicity && <ToxicityBadge plant={item} />}
+                </span>
                 <span className={`plant-row-type-${item.type}`}>{typeLabel[item.type]}</span>
               </div>
               {guide && <span className={`diff-badge-small ${DIFF_CLASS[guide.difficulty] ?? "diff-easy"}`}>{guide.difficulty}</span>}
