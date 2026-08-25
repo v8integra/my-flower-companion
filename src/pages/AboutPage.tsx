@@ -3,6 +3,7 @@ import { AppIcon } from "@/components/AppIcon";
 import { useLanguage } from "@/context/LanguageContext";
 import { PLANTS } from "@/data/plants";
 import { COMPANION_TIPS, COMPANION_TIPS_TITLE } from "@/translations/companion-tips";
+import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 import "./AboutPage.css";
 
 const flowerCount = PLANTS.filter(p => p.type === "flower").length;
@@ -34,6 +35,10 @@ function Step({ number, title, body }: { number: number; title: string; body: st
 
 export default function AboutPage() {
   const { t, lang } = useLanguage();
+  useDocumentMeta(
+    "What Is Companion Planting? | My Flower Companion",
+    "Learn what companion planting is, how it works, and the science behind pairing plants for pest control, pollination, and healthier gardens."
+  );
   const tips = COMPANION_TIPS[lang];
   const tipsTitle = COMPANION_TIPS_TITLE[lang];
 

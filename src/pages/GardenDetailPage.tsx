@@ -7,6 +7,7 @@ import ZoneBadge from "@/components/ZoneBadge";
 import { useGarden } from "@/context/GardenContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { getConflictsInGarden, PLANTS } from "@/data/plants";
+import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 import "@/components/ConflictBadge.css";
 import "./GardenDetailPage.css";
 
@@ -20,6 +21,8 @@ export default function GardenDetailPage() {
   const [resetModalVisible, setResetModalVisible] = useState(false);
 
   const garden = gardens.find(g => g.id === id);
+  useDocumentMeta(garden ? `${garden.name} | My Flower Companion` : "Garden Not Found | My Flower Companion");
+
   if (!garden) {
     return (
       <div className="detail-center">

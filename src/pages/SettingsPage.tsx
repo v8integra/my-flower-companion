@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AppIcon } from "@/components/AppIcon";
 import Modal from "@/components/Modal";
+import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 import { useGarden } from "@/context/GardenContext";
 import { useLanguage } from "@/context/LanguageContext";
 import "./SettingsPage.css";
@@ -109,6 +110,10 @@ const ZONES = Array.from({ length: 13 }, (_, i) => i + 1);
 export default function SettingsPage() {
   const { globalZone, setGlobalZone } = useGarden();
   const { t } = useLanguage();
+  useDocumentMeta(
+    "Find Your USDA Growing Zone | My Flower Companion",
+    "Look up your USDA plant hardiness zone by ZIP code, city, or GPS location to get zone-accurate companion plant suggestions."
+  );
   const [locationInput, setLocationInput] = useState("");
   const [detecting, setDetecting] = useState(false);
   const [message, setMessage] = useState<{ title: string; body: string } | null>(null);

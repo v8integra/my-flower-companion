@@ -8,6 +8,7 @@ import { getConflictsForCandidate, PLANTS, Plant } from "@/data/plants";
 import { getPlantName } from "@/translations/plant-names";
 import ToxicityBadge from "@/components/ToxicityBadge";
 import ConflictBadge from "@/components/ConflictBadge";
+import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 import "./AddPlantPage.css";
 
 export default function AddPlantPage() {
@@ -15,6 +16,7 @@ export default function AddPlantPage() {
   const navigate = useNavigate();
   const { gardens, addPlantToGarden, removePlantFromGarden, customPlants, addCustomPlant, removeCustomPlant } = useGarden();
   const { t, lang } = useLanguage();
+  useDocumentMeta("Add Plants | My Flower Companion");
 
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<"all" | Plant["type"]>("all");

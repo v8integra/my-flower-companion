@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /garden/
+
+Sitemap: https://my-flower-companion.vercel.app/sitemap.xml

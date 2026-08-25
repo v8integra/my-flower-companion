@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { AppIcon } from "@/components/AppIcon";
 import Modal from "@/components/Modal";
+import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 import { useLanguage } from "@/context/LanguageContext";
 import { PLANTS, Plant } from "@/data/plants";
 import { CARE_GUIDES, CareGuide } from "@/data/care";
@@ -121,6 +122,10 @@ function CareModal({ plant, guide, onClose }: { plant: Plant; guide: CareGuide; 
 
 export default function CarePage() {
   const { t, lang } = useLanguage();
+  useDocumentMeta(
+    `Plant Care Guide — ${PLANTS.length} Vegetables, Herbs & Flowers | My Flower Companion`,
+    `Browse care guides for ${PLANTS.length} plants: sunlight, watering, spacing, and expert tips for vegetables, herbs, and flowers.`
+  );
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<"all" | Plant["type"]>("all");
   const [selected, setSelected] = useState<{ plant: Plant; guide: CareGuide } | null>(null);

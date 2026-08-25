@@ -8,12 +8,17 @@ import { useGarden } from "@/context/GardenContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { PLANTS } from "@/data/plants";
 import { LANGUAGES } from "@/translations";
+import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 import "./GardensPage.css";
 
 export default function GardensPage() {
   const { gardens, createGarden, deleteGarden } = useGarden();
   const { t, lang, setLang } = useLanguage();
   const navigate = useNavigate();
+  useDocumentMeta(
+    "My Flower Companion — Companion Planting Garden Planner",
+    "Add the vegetables, herbs, and flowers already in your garden and instantly see which companion plants help — with real reasons why. Free, no account needed."
+  );
   const [creating, setCreating] = useState(false);
   const [newName, setNewName] = useState("");
   const [deleteTarget, setDeleteTarget] = useState<{ id: string; name: string } | null>(null);

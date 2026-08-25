@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { GardenProvider } from "@/context/GardenContext";
 import { LanguageProvider } from "@/context/LanguageContext";
 import ErrorBoundary from "@/components/ErrorBoundary";
@@ -16,7 +16,7 @@ export default function App() {
     <ErrorBoundary>
       <LanguageProvider>
         <GardenProvider>
-          <HashRouter>
+          <BrowserRouter>
             <Routes>
               <Route element={<TabLayout />}>
                 <Route path="/" element={<GardensPage />} />
@@ -28,7 +28,7 @@ export default function App() {
               <Route path="/garden/:id/add-plant" element={<AddPlantPage />} />
               <Route path="/garden/:id/companions" element={<CompanionsPage />} />
             </Routes>
-          </HashRouter>
+          </BrowserRouter>
         </GardenProvider>
       </LanguageProvider>
     </ErrorBoundary>

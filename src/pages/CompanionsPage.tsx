@@ -7,6 +7,7 @@ import { useGarden } from "@/context/GardenContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { getCompanionsForPlants, getZoneSuggestions } from "@/data/plants";
 import { getPlantName } from "@/translations/plant-names";
+import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 import "./CompanionsPage.css";
 
 export default function CompanionsPage() {
@@ -16,6 +17,7 @@ export default function CompanionsPage() {
   const navigate = useNavigate();
 
   const garden = gardens.find(g => g.id === id);
+  useDocumentMeta(garden ? `Companion Plants for ${garden.name} | My Flower Companion` : "Garden Not Found | My Flower Companion");
 
   const companions = useMemo(() => {
     if (!garden) return [];
