@@ -1,0 +1,248 @@
+.gardens-page {
+  padding: 20px 16px 16px;
+}
+
+.gardens-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+}
+
+.gardens-app-name {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.gardens-subtitle {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 2px 0 0;
+}
+
+.gardens-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lang-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 19px;
+  background: var(--soft-green);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 21px;
+  background: var(--primary);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(74, 124, 89, 0.3);
+}
+
+.create-card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.create-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.create-actions button {
+  flex: 1;
+}
+
+.gardens-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.garden-card-wrapper {
+  position: relative;
+}
+
+.garden-card {
+  width: 100%;
+  text-align: left;
+  background: var(--card);
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+}
+
+.garden-card:hover {
+  border-color: var(--primary-light);
+}
+
+.garden-card-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.garden-card-icon-bg {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: var(--soft-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.garden-card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.garden-card-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.garden-card-count {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.garden-card-right-spacer {
+  width: 68px;
+  flex-shrink: 0;
+}
+
+.garden-card-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.garden-card-more {
+  font-size: 11px;
+  color: var(--text-secondary);
+  align-self: center;
+}
+
+.garden-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+  margin-top: 2px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--primary);
+}
+
+.garden-card-right-col {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.trash-btn {
+  background: none;
+  border: none;
+  padding: 2px;
+  display: flex;
+}
+
+/* Language picker */
+
+.lang-picker-card {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 20px;
+  width: 100%;
+  max-width: 360px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.lang-picker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.lang-picker-header h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.lang-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+  border-radius: 12px;
+  margin-bottom: 2px;
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+}
+
+.lang-row-active {
+  background: var(--soft-green);
+}
+
+.lang-flag {
+  font-size: 22px;
+}
+
+.lang-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.lang-native {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.lang-row-active .lang-native {
+  color: var(--primary);
+}
+
+.lang-english {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 1px;
+}

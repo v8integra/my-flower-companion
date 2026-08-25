@@ -1,0 +1,281 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --primary: #4a7c59;
+  --primary-light: #6ba583;
+  --primary-dark: #2e5c3a;
+  --accent: #e8845a;
+  --accent-light: #f5b89a;
+  --soft: #f9f4ee;
+  --soft-green: #edf5f0;
+  --soft-pink: #fef0eb;
+  --text: #1c2b1e;
+  --text-secondary: #6b7e6e;
+  --border: #d9e8dc;
+  --background: #ffffff;
+  --card: #ffffff;
+  --danger: #d94f4f;
+  --danger-light: #fdeaea;
+  --warning: #e8a83a;
+  --warning-light: #fff4de;
+  --success: #4a8c5c;
+  --success-light: #eaf5ee;
+
+  --flower-color: #c4634a;
+  --flower-bg: var(--soft-pink);
+  --herb-color: var(--primary);
+  --herb-bg: var(--soft-green);
+  --vegetable-color: #7a6a55;
+  --vegetable-bg: var(--soft);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--soft);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button,
+input,
+textarea {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+/* ---- Shared form / button primitives ---- */
+
+.text-input {
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0 12px;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--soft);
+  width: 100%;
+}
+
+.text-input:focus,
+.text-input:focus-visible {
+  outline: 2px solid var(--primary-light);
+  outline-offset: -1px;
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-danger {
+  border-radius: 10px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 11px 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: #fff;
+}
+
+.btn-primary:disabled,
+.btn-danger:disabled {
+  background: var(--border);
+  cursor: not-allowed;
+}
+
+.btn-pill {
+  border-radius: 24px;
+  padding: 12px 24px;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--soft);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ---- Shared modal ---- */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  z-index: 100;
+}
+
+.modal-card {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 24px;
+  width: 100%;
+  max-width: 340px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.modal-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 10px;
+  text-align: center;
+}
+
+.modal-message {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 20px;
+  margin: 0 0 20px;
+  text-align: center;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* ---- Empty state ---- */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 80px 40px 20px;
+}
+
+.empty-state h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+
+.empty-state p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 20px;
+  margin: 0;
+}
+
+/* ---- Shared search / filter bar ---- */
+
+.search-row {
+  display: flex;
+  align-items: center;
+  background: var(--card);
+  border-radius: 12px;
+  margin: 0 16px 12px;
+  padding: 0 12px;
+  height: 46px;
+  border: 1px solid var(--border);
+  gap: 8px;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  background: none;
+  font-size: 15px;
+  color: var(--text);
+  outline: none;
+}
+
+.clear-search-btn {
+  background: none;
+  border: none;
+  display: flex;
+}
+
+.filter-row {
+  display: flex;
+  padding: 0 16px;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 7px 14px;
+  border-radius: 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.filter-btn-active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+/* ---- Shared plant type colors ---- */
+
+.plant-row-icon-flower { background: var(--flower-bg); color: var(--flower-color); }
+.plant-row-icon-herb { background: var(--herb-bg); color: var(--herb-color); }
+.plant-row-icon-vegetable { background: var(--vegetable-bg); color: var(--vegetable-color); }
+
+.plant-row-type-flower { color: var(--flower-color); }
+.plant-row-type-herb { color: var(--herb-color); }
+.plant-row-type-vegetable { color: var(--vegetable-color); }

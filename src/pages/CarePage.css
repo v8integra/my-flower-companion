@@ -1,0 +1,269 @@
+.care-page {
+  padding-top: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.care-header {
+  padding: 0 20px 12px;
+}
+
+.care-header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.care-header p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 2px 0 0;
+}
+
+.care-list {
+  padding: 0 16px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.care-row {
+  display: flex;
+  align-items: center;
+  background: var(--card);
+  border-radius: 14px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  gap: 12px;
+  text-align: left;
+}
+
+.care-row:disabled {
+  opacity: 0.6;
+}
+
+.care-row-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.care-row-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+}
+
+.care-row-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.diff-badge-small,
+.diff-badge {
+  padding: 3px 8px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.diff-easy { background: var(--success-light); color: var(--success); }
+.diff-moderate { background: var(--warning-light); color: var(--warning); }
+.diff-expert { background: var(--danger-light); color: var(--danger); }
+
+/* Care detail sheet */
+
+.care-sheet {
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 0;
+  border-radius: 24px 24px 0 0;
+}
+
+.sheet-handle {
+  width: 36px;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  margin: 12px auto 16px;
+}
+
+.care-sheet-header {
+  display: flex;
+  align-items: center;
+  padding: 0 20px 16px;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.care-sheet-icon-bg {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.care-sheet-title-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.care-sheet-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.care-sheet-type {
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.care-sheet-scroll {
+  padding: 16px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.care-plant-image {
+  width: 100%;
+  height: 200px;
+  border-radius: 16px;
+  background: var(--soft);
+  object-fit: cover;
+}
+
+.zone-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--soft);
+  border-radius: 14px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  gap: 12px;
+}
+
+.zone-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.zone-bar-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.zone-bar-range {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.zone-dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  max-width: 140px;
+  justify-content: flex-end;
+}
+
+.zone-dot {
+  background: var(--primary-light);
+  border-radius: 6px;
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.info-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.info-cell {
+  width: calc(50% - 5px);
+  background: var(--soft);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid var(--border);
+}
+
+.info-cell-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.info-cell-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.tips-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+
+.tip-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.tip-bullet {
+  width: 22px;
+  height: 22px;
+  border-radius: 11px;
+  background: var(--primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 700;
+  margin-top: 1px;
+}
+
+.tip-text {
+  flex: 1;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 20px;
+}
+
+.desc-card {
+  display: flex;
+  gap: 10px;
+  background: var(--soft);
+  border-radius: 12px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 19px;
+}

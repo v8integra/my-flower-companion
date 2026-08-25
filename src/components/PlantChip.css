@@ -1,0 +1,46 @@
+.plant-chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 20px;
+  padding: 6px 12px;
+  gap: 4px;
+  align-self: flex-start;
+}
+
+.plant-chip-compact {
+  padding: 4px 8px;
+}
+
+.plant-chip-flower {
+  background: var(--flower-bg);
+  color: var(--flower-color);
+}
+.plant-chip-herb {
+  background: var(--herb-bg);
+  color: var(--herb-color);
+}
+.plant-chip-vegetable {
+  background: var(--vegetable-bg);
+  color: var(--vegetable-color);
+}
+
+.plant-chip-name {
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.plant-chip-compact .plant-chip-name {
+  font-size: 11px;
+}
+
+.plant-chip-remove {
+  margin-left: 2px;
+  background: none;
+  border: none;
+  padding: 2px;
+  color: inherit;
+  display: inline-flex;
+}

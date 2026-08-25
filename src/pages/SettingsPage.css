@@ -1,0 +1,148 @@
+.settings-page {
+  padding: 20px 20px 40px;
+  max-width: 600px;
+}
+
+.settings-header {
+  padding-bottom: 20px;
+}
+
+.settings-header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.settings-header p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 2px 0 0;
+}
+
+.current-zone {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--soft-green);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border);
+}
+
+.current-zone-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.current-zone-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.current-zone-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.settings-section {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.settings-section h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+
+.settings-section p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 18px;
+  margin: 0;
+}
+
+.detect-btn {
+  width: 100%;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 4px 0;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.divider span {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.lookup-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.lookup-btn {
+  background: var(--primary-dark);
+  white-space: nowrap;
+}
+
+.zone-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.zone-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--soft);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.zone-btn-active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.info-box {
+  display: flex;
+  gap: 8px;
+  padding: 14px;
+  background: var(--soft);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  margin-top: 4px;
+}
+
+.info-box p {
+  flex: 1;
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 18px;
+  margin: 0;
+}

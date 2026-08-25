@@ -1,0 +1,153 @@
+.companions-page {
+  padding-top: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.companions-header {
+  display: flex;
+  align-items: center;
+  padding: 4px 16px 12px;
+  gap: 8px;
+}
+
+.companions-header-center {
+  flex: 1;
+}
+
+.companions-header-center h1 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.companions-header-center p {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.stats-row {
+  display: flex;
+  background: var(--card);
+  margin: 0 16px 12px;
+  border-radius: 16px;
+  padding: 14px;
+  border: 1px solid var(--border);
+}
+
+.stat {
+  flex: 1;
+  text-align: center;
+}
+
+.stat-num {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.stat-divider {
+  width: 1px;
+  background: var(--border);
+}
+
+.companions-list {
+  padding: 0 16px 40px;
+}
+
+.companions-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 60px 40px 20px;
+}
+
+.companions-empty h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+
+.companions-empty p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 20px;
+  margin: 0;
+}
+
+.suggest-section {
+  width: 100%;
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.suggest-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.suggest-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--card);
+  border-radius: 14px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+.suggest-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--soft-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.suggest-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.suggest-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.suggest-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 16px;
+}
+
+.suggest-zone-badge {
+  background: var(--soft-green);
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--primary);
+  white-space: nowrap;
+}

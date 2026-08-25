@@ -1,0 +1,16 @@
+.zone-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--soft-green);
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: none;
+  font-family: inherit;
+}
+
+.zone-badge-text {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--primary);
+}
