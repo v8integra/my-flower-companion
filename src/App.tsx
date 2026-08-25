@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { GardenProvider } from "@/context/GardenContext";
 import { LanguageProvider } from "@/context/LanguageContext";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import ScrollToTop from "@/components/ScrollToTop";
 import TabLayout from "@/layout/TabLayout";
 import GardensPage from "@/pages/GardensPage";
 import SettingsPage from "@/pages/SettingsPage";
@@ -18,6 +19,7 @@ export default function App() {
       <LanguageProvider>
         <GardenProvider>
           <BrowserRouter>
+            <ScrollToTop />
             <Routes>
               <Route element={<TabLayout />}>
                 <Route path="/" element={<GardensPage />} />
