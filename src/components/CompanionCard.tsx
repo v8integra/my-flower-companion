@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { AppIcon } from "@/components/AppIcon";
 import { useLanguage } from "@/context/LanguageContext";
 import { Plant } from "@/data/plants";
@@ -41,7 +42,7 @@ export default function CompanionCard({ plant, benefit, benefitType }: Companion
   };
 
   return (
-    <div className="companion-card">
+    <Link to={`/care/${plant.id}`} className="companion-card">
       <div className="companion-card-header">
         <div className="companion-card-icon-bg" style={{ background: config.bg }}>
           <AppIcon name={config.icon} size={20} color={config.color} />
@@ -63,6 +64,6 @@ export default function CompanionCard({ plant, benefit, benefitType }: Companion
         <AppIcon name="location-outline" size={12} color="var(--text-secondary)" />
         <span>Zones {plant.zones[0]}–{plant.zones[plant.zones.length - 1]}</span>
       </div>
-    </div>
+    </Link>
   );
 }

@@ -10,6 +10,7 @@ import AboutPage from "@/pages/AboutPage";
 import GardenDetailPage from "@/pages/GardenDetailPage";
 import AddPlantPage from "@/pages/AddPlantPage";
 import CompanionsPage from "@/pages/CompanionsPage";
+import PlantDetailPage from "@/pages/PlantDetailPage";
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
               <Route path="/garden/:id" element={<GardenDetailPage />} />
               <Route path="/garden/:id/add-plant" element={<AddPlantPage />} />
               <Route path="/garden/:id/companions" element={<CompanionsPage />} />
+              <Route path="/care/:plantId" element={<PlantDetailPage />} />
             </Routes>
           </BrowserRouter>
         </GardenProvider>

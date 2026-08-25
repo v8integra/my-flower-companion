@@ -769,3 +769,17 @@ export function getConflictsForCandidate(
   }
   return results;
 }
+
+/** Every plant a given plant is known to clash with, regardless of what's in any garden. */
+export function getAvoidListForPlant(plantId: string): { plant: Plant; reason: string }[] {
+  const results: { plant: Plant; reason: string }[] = [];
+  for (const pair of AVOID_PAIRS) {
+    let otherId: string | null = null;
+    if (pair.a === plantId) otherId = pair.b;
+    else if (pair.b === plantId) otherId = pair.a;
+    if (!otherId) continue;
+    const plant = PLANTS.find(p => p.id === otherId);
+    if (plant) results.push({ plant, reason: pair.reason });
+  }
+  return results;
+}

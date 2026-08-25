@@ -34,7 +34,7 @@ domain is attached:
 
 - `index.html` — canonical link, Open Graph/Twitter tags, JSON-LD
 - `public/robots.txt` — sitemap reference
-- `public/sitemap.xml` — all page URLs
+- `scripts/generate-sitemap.mjs` — the `SITE_URL` constant (regenerates `sitemap.xml`)
 
 ## Stack
 
@@ -49,11 +49,20 @@ domain is attached:
 - Meta tags, Open Graph/Twitter cards, canonical URL, and JSON-LD (`WebApplication`
   schema) live in `index.html`. Per-page `<title>` and meta description are set at
   runtime via `useDocumentMeta` in each page component.
+- Every plant has its own real, linkable page at `/care/:plantId` (163 of them) —
+  sun/water/spacing/tips plus that plant's companion and "avoid" pairings, each
+  rendered as a real `<a>` (not a click handler), so crawlers can both reach and
+  discover these pages by following links, not just via the sitemap.
+- `scripts/generate-sitemap.mjs` regenerates `public/sitemap.xml` from the plant
+  catalog automatically before every build (`npm run prebuild` / wired into
+  `npm run build`), so new plants always get a sitemap entry with no manual step.
+  Run `npm run sitemap` to regenerate it on its own.
 - `public/robots.txt` disallows `/garden/*` — those pages are per-user data stored in
   the visitor's own browser and are meaningless to a crawler.
-- This is a client-rendered SPA with no server-side rendering, which is a real
-  ceiling on SEO: search engines must execute JavaScript to see page content, and
-  content shown only inside a modal (e.g. individual plant care guides) isn't
-  reachable by a crawler at all, since crawlers don't click buttons. The biggest
-  further win here would be giving each plant its own crawlable URL (e.g.
-  `/care/tomato`) instead of gating that content behind a click-to-open modal.
+- This is still a client-rendered SPA with no server-side rendering, which remains a
+  real ceiling on SEO: search engines must execute JavaScript to see any page's
+  content, including these new plant pages. Googlebot generally handles that, just
+  slower and less reliably than static HTML, and other engines are weaker at it. A
+  further step here would be prerendering (snapshotting each route to static HTML at
+  build time) — very feasible since all plant data is static and known at build time,
+  but a bigger addition than the routing work itself.

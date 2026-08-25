@@ -279,3 +279,65 @@ a {
 .plant-row-type-flower { color: var(--flower-color); }
 .plant-row-type-herb { color: var(--herb-color); }
 .plant-row-type-vegetable { color: var(--vegetable-color); }
+
+/* ---- Shared difficulty badge colors ---- */
+
+.diff-easy { background: var(--success-light); color: var(--success); }
+.diff-moderate { background: var(--warning-light); color: var(--warning); }
+.diff-expert { background: var(--danger-light); color: var(--danger); }
+
+/* ---- Shared "detail page" shell (back button + centered title header, not-found state) ---- */
+
+.detail-center {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.detail-not-found {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.detail-header {
+  display: flex;
+  align-items: center;
+  padding: 4px 16px 12px;
+  gap: 8px;
+}
+
+.icon-btn-plain {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  flex-shrink: 0;
+}
+
+.icon-btn-plain:disabled {
+  cursor: not-allowed;
+}
+
+.detail-header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
+
+.detail-garden-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
