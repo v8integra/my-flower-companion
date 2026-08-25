@@ -712,3 +712,60 @@ export function getZoneSuggestions(
     p => p.type === "flower" && p.zones.includes(zone) && !excludeIds.includes(p.id)
   ).slice(0, max);
 }
+
+export interface AvoidPair {
+  a: string;
+  b: string;
+  reason: string;
+}
+
+// Companion planting is as much about avoiding bad neighbors as choosing good ones.
+// These are well-documented antagonistic pairings — shared diseases, allelopathic
+// chemicals, or nutrient competition — not the same "no data yet" as an absent pair.
+export const AVOID_PAIRS: AvoidPair[] = [
+  { a: "tomato", b: "potato", reason: "Both are nightshades susceptible to the same blight — growing them together makes it easier for the disease to spread between them" },
+  { a: "tomato", b: "corn", reason: "Both attract the same pest (corn earworm doubles as tomato fruitworm) and are heavy feeders that compete hard for soil nutrients" },
+  { a: "tomato", b: "fennel", reason: "Fennel releases allelopathic compounds from its roots that inhibit tomato growth" },
+  { a: "tomato", b: "cabbage", reason: "Brassicas like cabbage are known to stunt tomato growth when planted too close" },
+  { a: "tomato", b: "broccoli", reason: "Brassicas like broccoli are known to stunt tomato growth when planted too close" },
+  { a: "bean", b: "onion", reason: "Alliums release compounds that disrupt the nitrogen-fixing bacteria on bean roots, stunting growth" },
+  { a: "bean", b: "garlic", reason: "Alliums release compounds that disrupt the nitrogen-fixing bacteria on bean roots, stunting growth" },
+  { a: "pea", b: "onion", reason: "Alliums disrupt the nitrogen-fixing bacteria peas rely on and can inhibit pod formation" },
+  { a: "pea", b: "garlic", reason: "Alliums disrupt the nitrogen-fixing bacteria peas rely on and can inhibit pod formation" },
+  { a: "carrot", b: "dill", reason: "Both are in the same family — if dill is allowed to flower it can cross-pollinate with carrots and mature dill can stunt carrot growth" },
+  { a: "carrot", b: "potato", reason: "Both are heavy-feeding root crops competing for the same phosphorus-rich soil, leading to a weaker harvest for both" },
+  { a: "cucumber", b: "potato", reason: "Shares disease susceptibility with potatoes and competes heavily for the same soil nutrients" },
+  { a: "cucumber", b: "sage", reason: "Sage's strong root chemicals are known to stunt cucumber growth" },
+  { a: "fennel", b: "bean", reason: "Fennel is broadly allelopathic — it inhibits the growth of most nearby vegetables, beans included" },
+  { a: "fennel", b: "pepper", reason: "Fennel is broadly allelopathic — it inhibits the growth of most nearby vegetables, peppers included" },
+];
+
+/** Antagonistic pairings where BOTH plants are already in the same garden. */
+export function getConflictsInGarden(plantIds: string[]): { plantA: Plant; plantB: Plant; reason: string }[] {
+  const set = new Set(plantIds);
+  const results: { plantA: Plant; plantB: Plant; reason: string }[] = [];
+  for (const pair of AVOID_PAIRS) {
+    if (!set.has(pair.a) || !set.has(pair.b)) continue;
+    const plantA = PLANTS.find(p => p.id === pair.a);
+    const plantB = PLANTS.find(p => p.id === pair.b);
+    if (plantA && plantB) results.push({ plantA, plantB, reason: pair.reason });
+  }
+  return results;
+}
+
+/** Plants already in a garden that a given candidate plant is known to clash with. */
+export function getConflictsForCandidate(
+  candidateId: string,
+  existingPlantIds: string[]
+): { plant: Plant; reason: string }[] {
+  const results: { plant: Plant; reason: string }[] = [];
+  for (const pair of AVOID_PAIRS) {
+    let otherId: string | null = null;
+    if (pair.a === candidateId) otherId = pair.b;
+    else if (pair.b === candidateId) otherId = pair.a;
+    if (!otherId || !existingPlantIds.includes(otherId)) continue;
+    const plant = PLANTS.find(p => p.id === otherId);
+    if (plant) results.push({ plant, reason: pair.reason });
+  }
+  return results;
+}

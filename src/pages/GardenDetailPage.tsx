@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppIcon } from "@/components/AppIcon";
+import Modal from "@/components/Modal";
 import PlantChip from "@/components/PlantChip";
 import ZoneBadge from "@/components/ZoneBadge";
 import { useGarden } from "@/context/GardenContext";
 import { useLanguage } from "@/context/LanguageContext";
-import { PLANTS } from "@/data/plants";
+import { getConflictsInGarden, PLANTS } from "@/data/plants";
+import "@/components/ConflictBadge.css";
 import "./GardenDetailPage.css";
 
 export default function GardenDetailPage() {
@@ -29,6 +31,7 @@ export default function GardenDetailPage() {
 
   const allPlants = [...customPlants, ...PLANTS];
   const plants = garden.plantIds.map(pid => allPlants.find(p => p.id === pid)).filter(Boolean) as typeof PLANTS;
+  const conflicts = getConflictsInGarden(garden.plantIds);
 
   const confirmReset = () => {
     resetGarden(garden.id);
@@ -52,11 +55,13 @@ export default function GardenDetailPage() {
           {editingName ? (
             <input
               className="detail-name-input"
+              aria-label={t("garden_name_placeholder")}
               value={nameInput}
               onChange={e => setNameInput(e.target.value)}
               onKeyDown={e => e.key === "Enter" && saveName()}
               onBlur={saveName}
               autoFocus
+              maxLength={40}
             />
           ) : (
             <button className="detail-name-btn" onClick={() => { setNameInput(garden.name); setEditingName(true); }}>
@@ -110,6 +115,22 @@ export default function GardenDetailPage() {
           </label>
         </div>
 
+        {conflicts.length > 0 && (
+          <div className="conflict-banner">
+            <AppIcon name="alert-circle" size={18} color="var(--warning)" />
+            <div>
+              <div className="conflict-banner-title">
+                {conflicts.length === 1 ? "These plants may not thrive together" : "Some plants in this garden may not thrive together"}
+              </div>
+              {conflicts.map((c, i) => (
+                <p className="conflict-banner-note" key={i}>
+                  <strong>{c.plantA.name} + {c.plantB.name}:</strong> {c.reason}
+                </p>
+              ))}
+            </div>
+          </div>
+        )}
+
         <div className="section-header">
           <h3>{t("my_plants")}</h3>
           <button className="add-plant-btn" onClick={() => navigate(`/garden/${garden.id}/add-plant`)}>
@@ -141,19 +162,17 @@ export default function GardenDetailPage() {
       </div>
 
       {resetModalVisible && (
-        <div className="modal-overlay" onClick={() => setResetModalVisible(false)}>
-          <div className="modal-card" onClick={e => e.stopPropagation()}>
-            <div className="modal-icon-row">
-              <AppIcon name="refresh-circle" size={32} color="var(--danger)" />
-            </div>
-            <h3 className="modal-title">{t("reset_garden")}</h3>
-            <p className="modal-message">{t("reset_garden_confirm", { name: garden.name })}</p>
-            <div className="modal-actions">
-              <button className="btn-secondary flex-1" onClick={() => setResetModalVisible(false)}>{t("cancel")}</button>
-              <button className="btn-danger flex-1" onClick={confirmReset}>{t("reset")}</button>
-            </div>
+        <Modal onClose={() => setResetModalVisible(false)} ariaLabel={t("reset_garden")} panelClassName="modal-card">
+          <div className="modal-icon-row">
+            <AppIcon name="refresh-circle" size={32} color="var(--danger)" />
           </div>
-        </div>
+          <h3 className="modal-title">{t("reset_garden")}</h3>
+          <p className="modal-message">{t("reset_garden_confirm", { name: garden.name })}</p>
+          <div className="modal-actions">
+            <button className="btn-secondary flex-1" onClick={() => setResetModalVisible(false)}>{t("cancel")}</button>
+            <button className="btn-danger flex-1" onClick={confirmReset}>{t("reset")}</button>
+          </div>
+        </Modal>
       )}
     </div>
   );

@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { AppIcon } from "@/components/AppIcon";
+import Modal from "@/components/Modal";
 import { useLanguage } from "@/context/LanguageContext";
 import { PLANTS, Plant } from "@/data/plants";
 import { CARE_GUIDES, CareGuide } from "@/data/care";
@@ -54,8 +55,7 @@ function CareModal({ plant, guide, onClose }: { plant: Plant; guide: CareGuide; 
   const zoneSingleFn = (n: number) => t("zone_single_fmt", { n });
 
   return (
-    <div className="modal-overlay modal-overlay-bottom" onClick={onClose}>
-      <div className="sheet-card care-sheet" onClick={e => e.stopPropagation()}>
+    <Modal onClose={onClose} ariaLabel={getPlantName(plant, lang)} panelClassName="sheet-card care-sheet" variant="bottom">
         <div className="sheet-handle" />
         <div className="care-sheet-header">
           <div className={`care-sheet-icon-bg plant-row-icon-${plant.type}`}>
@@ -115,8 +115,7 @@ function CareModal({ plant, guide, onClose }: { plant: Plant; guide: CareGuide; 
             <span>{plant.description}</span>
           </div>
         </div>
-      </div>
-    </div>
+    </Modal>
   );
 }
 
@@ -156,7 +155,7 @@ export default function CarePage() {
 
       <div className="search-row">
         <AppIcon name="search" size={18} color="var(--text-secondary)" />
-        <input className="search-input" placeholder={t("search_plants")} value={search} onChange={e => setSearch(e.target.value)} />
+        <input className="search-input" placeholder={t("search_plants")} aria-label={t("search_plants")} value={search} onChange={e => setSearch(e.target.value)} />
         {search.length > 0 && (
           <button className="clear-search-btn" onClick={() => setSearch("")}>
             <AppIcon name="close-circle" size={18} color="var(--text-secondary)" />

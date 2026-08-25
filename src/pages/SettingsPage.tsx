@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { AppIcon } from "@/components/AppIcon";
+import Modal from "@/components/Modal";
 import { useGarden } from "@/context/GardenContext";
 import { useLanguage } from "@/context/LanguageContext";
 import "./SettingsPage.css";
@@ -212,6 +213,7 @@ export default function SettingsPage() {
           <input
             className="text-input flex-1"
             placeholder={t("lookup_placeholder")}
+            aria-label={t("lookup_title")}
             value={locationInput}
             onChange={e => setLocationInput(e.target.value)}
             onKeyDown={e => e.key === "Enter" && handleLocationLookup()}
@@ -241,15 +243,13 @@ export default function SettingsPage() {
       </div>
 
       {message && (
-        <div className="modal-overlay" onClick={() => setMessage(null)}>
-          <div className="modal-card" onClick={e => e.stopPropagation()}>
-            <h3 className="modal-title">{message.title}</h3>
-            <p className="modal-message">{message.body}</p>
-            <div className="modal-actions">
-              <button className="btn-primary flex-1" onClick={() => setMessage(null)}>OK</button>
-            </div>
+        <Modal onClose={() => setMessage(null)} ariaLabel={message.title} panelClassName="modal-card">
+          <h3 className="modal-title">{message.title}</h3>
+          <p className="modal-message">{message.body}</p>
+          <div className="modal-actions">
+            <button className="btn-primary flex-1" onClick={() => setMessage(null)}>OK</button>
           </div>
-        </div>
+        </Modal>
       )}
     </div>
   );

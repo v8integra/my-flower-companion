@@ -1,11 +1,13 @@
 import { useMemo, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppIcon } from "@/components/AppIcon";
+import Modal from "@/components/Modal";
 import { useGarden } from "@/context/GardenContext";
 import { useLanguage } from "@/context/LanguageContext";
-import { PLANTS, Plant } from "@/data/plants";
+import { getConflictsForCandidate, PLANTS, Plant } from "@/data/plants";
 import { getPlantName } from "@/translations/plant-names";
 import ToxicityBadge from "@/components/ToxicityBadge";
+import ConflictBadge from "@/components/ConflictBadge";
 import "./AddPlantPage.css";
 
 export default function AddPlantPage() {
@@ -92,6 +94,7 @@ export default function AddPlantPage() {
         <input
           className="search-input"
           placeholder={t("search_plants")}
+          aria-label={t("search_plants")}
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
@@ -136,6 +139,10 @@ export default function AddPlantPage() {
           filtered.map(item => {
             const added = existingIds.has(item.id);
             const isCustom = item.id.startsWith("custom_");
+            const conflicts = getConflictsForCandidate(
+              item.id,
+              (garden?.plantIds ?? []).filter(pid => pid !== item.id)
+            );
             return (
               <div className={"plant-row" + (added ? " plant-row-added" : "")} key={item.id}>
                 <div className={`plant-row-icon plant-row-icon-${item.type}`}>
@@ -145,6 +152,7 @@ export default function AddPlantPage() {
                   <div className="plant-row-name-line">
                     <span className="plant-row-name">{getPlantName(item, lang)}</span>
                     {item.toxicity && <ToxicityBadge plant={item} />}
+                    {conflicts.length > 0 && <ConflictBadge conflicts={conflicts} />}
                     {isCustom && <span className="custom-badge">{t("custom_badge")}</span>}
                   </div>
                   <span className={`plant-row-type plant-row-type-${item.type}`}>{typeLabel[item.type]}</span>
@@ -167,29 +175,32 @@ export default function AddPlantPage() {
       </div>
 
       {deleteTarget && (
-        <div className="modal-overlay" onClick={() => setDeleteTarget(null)}>
-          <div className="modal-card" onClick={e => e.stopPropagation()}>
-            <div className="delete-modal-icon">
-              <AppIcon name="trash" size={28} color="var(--danger)" />
-            </div>
-            <h3 className="modal-title">{t("delete_custom_plant")}</h3>
-            <p className="modal-message">{t("delete_custom_body", { name: deleteTarget.name })}</p>
-            <div className="modal-actions">
-              <button className="btn-secondary flex-1" onClick={() => setDeleteTarget(null)}>{t("cancel")}</button>
-              <button
-                className="btn-danger flex-1"
-                onClick={() => { removeCustomPlant(deleteTarget.id); setDeleteTarget(null); }}
-              >
-                <AppIcon name="trash-outline" size={16} color="#fff" /> {t("delete")}
-              </button>
-            </div>
+        <Modal onClose={() => setDeleteTarget(null)} ariaLabel={t("delete_custom_plant")} panelClassName="modal-card">
+          <div className="delete-modal-icon">
+            <AppIcon name="trash" size={28} color="var(--danger)" />
           </div>
-        </div>
+          <h3 className="modal-title">{t("delete_custom_plant")}</h3>
+          <p className="modal-message">{t("delete_custom_body", { name: deleteTarget.name })}</p>
+          <div className="modal-actions">
+            <button className="btn-secondary flex-1" onClick={() => setDeleteTarget(null)}>{t("cancel")}</button>
+            <button
+              className="btn-danger flex-1"
+              onClick={() => { removeCustomPlant(deleteTarget.id); setDeleteTarget(null); }}
+            >
+              <AppIcon name="trash-outline" size={16} color="#fff" /> {t("delete")}
+            </button>
+          </div>
+        </Modal>
       )}
 
       {modalVisible && (
-        <div className="modal-overlay modal-overlay-bottom" onClick={() => setModalVisible(false)}>
-          <div className="sheet-card" onClick={e => e.stopPropagation()}>
+        <Modal
+          onClose={() => setModalVisible(false)}
+          ariaLabel={t("add_custom_plant")}
+          panelClassName="sheet-card"
+          variant="bottom"
+          autoFocus={false}
+        >
             <div className="sheet-header">
               <h3>{t("add_custom_plant")}</h3>
               <button className="icon-btn" onClick={() => setModalVisible(false)}>
@@ -197,9 +208,10 @@ export default function AddPlantPage() {
               </button>
             </div>
 
-            <label className="sheet-label">{t("plant_name")}</label>
+            <label className="sheet-label" htmlFor="custom-plant-name">{t("plant_name")}</label>
             <div className="sheet-input-row">
               <input
+                id="custom-plant-name"
                 ref={nameInputRef}
                 className="sheet-input"
                 placeholder={t("plant_name_placeholder")}
@@ -230,8 +242,7 @@ export default function AddPlantPage() {
               <AppIcon name="add-circle" size={18} color="#fff" />
               {t("add_to_garden")}
             </button>
-          </div>
-        </div>
+        </Modal>
       )}
     </div>
   );

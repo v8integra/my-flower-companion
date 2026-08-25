@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppIcon } from "@/components/AppIcon";
+import Modal from "@/components/Modal";
 import PlantChip from "@/components/PlantChip";
 import ZoneBadge from "@/components/ZoneBadge";
 import { useGarden } from "@/context/GardenContext";
@@ -53,6 +54,8 @@ export default function GardensPage() {
           <input
             className="text-input"
             placeholder={t("garden_name_placeholder")}
+            aria-label={t("garden_name_placeholder")}
+            maxLength={40}
             value={newName}
             onChange={e => setNewName(e.target.value)}
             autoFocus
@@ -125,45 +128,41 @@ export default function GardensPage() {
       )}
 
       {deleteTarget && (
-        <div className="modal-overlay" onClick={() => setDeleteTarget(null)}>
-          <div className="modal-card" onClick={e => e.stopPropagation()}>
-            <h3 className="modal-title">{t("delete_garden")}</h3>
-            <p className="modal-message">
-              {t("delete_garden_confirm", { name: deleteTarget.name })}
-            </p>
-            <div className="modal-actions">
-              <button className="btn-secondary flex-1" onClick={() => setDeleteTarget(null)}>{t("cancel")}</button>
-              <button className="btn-danger flex-1" onClick={confirmDelete}>{t("delete")}</button>
-            </div>
+        <Modal onClose={() => setDeleteTarget(null)} ariaLabel={t("delete_garden")} panelClassName="modal-card">
+          <h3 className="modal-title">{t("delete_garden")}</h3>
+          <p className="modal-message">
+            {t("delete_garden_confirm", { name: deleteTarget.name })}
+          </p>
+          <div className="modal-actions">
+            <button className="btn-secondary flex-1" onClick={() => setDeleteTarget(null)}>{t("cancel")}</button>
+            <button className="btn-danger flex-1" onClick={confirmDelete}>{t("delete")}</button>
           </div>
-        </div>
+        </Modal>
       )}
 
       {langPickerVisible && (
-        <div className="modal-overlay" onClick={() => setLangPickerVisible(false)}>
-          <div className="lang-picker-card" onClick={e => e.stopPropagation()}>
-            <div className="lang-picker-header">
-              <h3>{t("select_language")}</h3>
-              <button className="icon-btn" onClick={() => setLangPickerVisible(false)}>
-                <AppIcon name="close" size={22} color="var(--text-secondary)" />
-              </button>
-            </div>
-            {LANGUAGES.map(l => (
-              <button
-                key={l.code}
-                className={"lang-row" + (lang === l.code ? " lang-row-active" : "")}
-                onClick={() => { setLang(l.code); setLangPickerVisible(false); }}
-              >
-                <span className="lang-flag">{l.flag}</span>
-                <span className="lang-info">
-                  <span className="lang-native">{l.nativeLabel}</span>
-                  <span className="lang-english">{l.label}</span>
-                </span>
-                {lang === l.code && <AppIcon name="checkmark" size={18} color="var(--primary)" />}
-              </button>
-            ))}
+        <Modal onClose={() => setLangPickerVisible(false)} ariaLabel={t("select_language")} panelClassName="lang-picker-card">
+          <div className="lang-picker-header">
+            <h3>{t("select_language")}</h3>
+            <button className="icon-btn" onClick={() => setLangPickerVisible(false)}>
+              <AppIcon name="close" size={22} color="var(--text-secondary)" />
+            </button>
           </div>
-        </div>
+          {LANGUAGES.map(l => (
+            <button
+              key={l.code}
+              className={"lang-row" + (lang === l.code ? " lang-row-active" : "")}
+              onClick={() => { setLang(l.code); setLangPickerVisible(false); }}
+            >
+              <span className="lang-flag">{l.flag}</span>
+              <span className="lang-info">
+                <span className="lang-native">{l.nativeLabel}</span>
+                <span className="lang-english">{l.label}</span>
+              </span>
+              {lang === l.code && <AppIcon name="checkmark" size={18} color="var(--primary)" />}
+            </button>
+          ))}
+        </Modal>
       )}
     </div>
   );
